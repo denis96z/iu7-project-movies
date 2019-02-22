@@ -2,11 +2,18 @@ version: "3"
 
 services:
   backend:
-    build: ./backend/.
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        - SERVER_PORT=80
     depends_on:
       - database
+    environment:
+      - MOVIES_DB_HOST=database
+      - MOVIES_DB_PORT=27017
     ports:
-      - "8080:8080"
+      - "8080:80"
 
   database:
     image: "mongo:4.0.6"

@@ -22,3 +22,15 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo"
 }
+
+task printArchivePath {
+    doLast {
+        print jar.getArchiveFile().get()
+    }
+}
+
+task printVersion {
+    doLast {
+        print jar.getArchiveVersion().get()
+    }
+}
