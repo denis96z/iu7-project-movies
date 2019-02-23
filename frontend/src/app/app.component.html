@@ -2,43 +2,49 @@
   <h1>Today's top movies</h1><br/><br/>
   <div class="row">
     <div class="col-md-3">
-      <ul>
-        <li><a href="#">Movie1</a></li>
-        <li><a href="#">Movie2</a></li>
-        <li><a href="#">Movie3</a></li>
-        <li><a href="#">Movie4</a></li>
-        <li><a href="#">Movie5</a></li>
-      </ul>
-      <p><button>Update list</button></p>
+      <div *ngIf="movies">
+        <ol>
+          <li *ngFor="let movie of movies; index as movieIndex" class="movie-list-item">
+            <a (click)="onMovieSelect(movieIndex)">{{movie.title}}</a>
+          </li>
+        </ol>
+      </div>
+      <p><button (click)="onUpdateBtnClick()" type="button" class="btn btn-secondary">Update list</button></p>
     </div>
     <div class="col-md-8">
-      <table class="table">
+      <table *ngIf="selectedMovie" class="table">
         <tbody>
-        <tr><td>Title</td><td>Movie1</td></tr>
-        <tr><td>Year</td><td>1990</td></tr>
-        <tr><td>Genre</td><td>Horror</td></tr>
-        <tr><td>Director</td><td>Mr. Director</td></tr>
-        <tr>
+        <tr *ngIf="selectedMovie.title">
+          <td>Title</td>
+          <td>{{selectedMovie.title}}</td>
+        </tr>
+        <tr *ngIf="selectedMovie.rating != null">
+          <td>Rating</td>
+          <td>{{selectedMovie.rating}}</td>
+        </tr>
+        <tr *ngIf="selectedMovie.year">
+          <td>Year</td>
+          <td>{{selectedMovie.year}}</td>
+        </tr>
+        <tr *ngIf="selectedMovie.genre">
+          <td>Genre</td>
+          <td>{{selectedMovie.genre}}</td>
+        </tr>
+        <tr *ngIf="selectedMovie.director">
+          <td>Director</td>
+          <td>{{selectedMovie.director}}</td>
+        </tr>
+        <tr *ngIf="selectedMovie.actors">
           <td>Actors</td>
           <td>
             <ul>
-              <li>Actor1</li>
-              <li>Actor2</li>
-              <li>Actor3</li>
-              <li>Actor4</li>
-              <li>Actor5</li>
+              <li *ngFor="let actor of selectedMovie.actors">{{actor}}</li>
             </ul>
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="selectedMovie.description">
           <td>Description</td>
-          <td>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </td>
+          <td>{{selectedMovie.description}}</td>
         </tr>
         </tbody>
       </table>
