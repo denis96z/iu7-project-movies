@@ -1,6 +1,8 @@
 package ru.bmstu.iu7.topmovies.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.bmstu.iu7.topmovies.backend.domain.Movie;
 import ru.bmstu.iu7.topmovies.backend.repository.MovieRepository;
@@ -23,7 +25,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Iterable<Movie> getTopMoviesList(Integer limit) {
-        throw new RuntimeException("not implemented yet");
+        var page = PageRequest.of(0, limit,
+                Sort.by(Sort.Direction.DESC, "rating"));
+        return this.movieRepository.findMovies(page).getContent();
     }
 
     @Override
