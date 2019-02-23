@@ -38,7 +38,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Optional<Movie> patchMovie(String movieId, Movie movieUpdate) {
         var movie = this.movieRepository.findById(movieId);
-        movieUpdate.setId(movie.getId());
+        if (movie.isEmpty()) {
+            return Optional.empty();
+        }
+        movieUpdate.setId(movieUpdate.getId());
         return Optional.of(this.movieRepository.save(movieUpdate));
     }
 
