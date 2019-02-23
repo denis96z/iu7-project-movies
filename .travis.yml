@@ -8,3 +8,31 @@ jobs:
         - ./backend/gradlew build
       after_script:
         - ./backend/gradlew clean
+
+    - stage: test backend
+      language: java
+      jdk:
+        - openjdk11
+      script:
+        - ./backend/gradlew test
+      after_script:
+        - ./backend/gradlew clean
+
+    - stage: build frontend
+      language: node_js
+        - "11.10.0"
+      script:
+        - cd frontend && npm install && npm run build
+
+    - stage: test frontend
+      language: node_js
+        - "11.10.0"
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
+      script:
+       - cd frontend && npm install
+       - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
