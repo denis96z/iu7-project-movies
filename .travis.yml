@@ -1,6 +1,6 @@
 jobs:
   include:
-    - stage: build backend
+    - stage: build and test backend
       language: java
       jdk:
         - openjdk11
@@ -9,12 +9,14 @@ jobs:
       after_script:
         - ./gradlew clean
 
-    - stage: test backend
+    - stage: report coverage
       language: java
       jdk:
         - openjdk11
       script:
-        - cd ./backend && ./gradlew test
+        - cd ./backend && ./gradlew test jacocoTestReport
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
       after_script:
         - ./gradlew clean
 
