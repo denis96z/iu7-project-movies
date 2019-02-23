@@ -32,4 +32,7 @@ public class Movie {
 
     @Field("rating")
     private Float rating;
+
+    @Field("description")
+    private String description;
 }
