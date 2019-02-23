@@ -1,0 +1,10 @@
+jobs:
+  include:
+    - stage: build backend
+      language: java
+      jdk:
+        - openjdk11
+      script:
+        - ./backend/gradlew build
+      after_script:
+        - ./backend/gradlew clean
