@@ -20,7 +20,6 @@ export class AppComponent {
   }
 
   onMovieSelect(movieIndex: number): void {
-    console.log('ok');
     this.selectedMovie = this.movies[movieIndex];
   }
 
@@ -30,7 +29,6 @@ export class AppComponent {
         if (movies.length > 0) {
           this.movies = movies;
           this.selectedMovie = movies[0];
-          console.log(this.selectedMovie);
         } else {
           this.movies = null;
           this.selectedMovie = null;
