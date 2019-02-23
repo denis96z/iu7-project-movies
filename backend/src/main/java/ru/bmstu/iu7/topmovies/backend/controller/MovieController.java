@@ -27,6 +27,9 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<Iterable<Movie>> getTopMovies(@RequestParam(name = "limit",
             required = false, defaultValue = Limit.DEFAULT_MOVIES_LIMIT) Integer limit) {
+        if (limit <= 0 && limit > Limit.MAX_MOVIES_LIMIT) {
+            return ResponseEntity.badRequest().build();
+        }
         var list = this.movieService.getTopMoviesList(limit);
         return ResponseEntity.ok(list);
     }
