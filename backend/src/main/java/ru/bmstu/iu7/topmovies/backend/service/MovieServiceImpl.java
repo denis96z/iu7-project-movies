@@ -27,7 +27,7 @@ public class MovieServiceImpl implements MovieService {
     public Iterable<Movie> getTopMoviesList(Integer limit) {
         var page = PageRequest.of(0, limit,
                 Sort.by(Sort.Direction.DESC, "rating"));
-        return this.movieRepository.findMovies(page).getContent();
+        return this.movieRepository.findAll(page).getContent();
     }
 
     @Override
