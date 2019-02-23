@@ -37,5 +37,11 @@ jobs:
           packages:
             - google-chrome-stable
       script:
-       - cd ./frontend && npm install
-       - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+        - cd ./frontend && npm install
+        - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
+    - stage: build images
+      services:
+        - docker
+      script:
+        - docker-compose build
