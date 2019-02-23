@@ -9,7 +9,7 @@ export class ApiService {
 
   public async getTopMovies(limit: number): Promise<Array<Movie>> {
     const path = this.apiUrl +
-      '/movies?' + limit.toString();
+      '/movies?limit=' + limit.toString();
 
     const response = await fetch(path);
 
