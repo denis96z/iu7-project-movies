@@ -1,18 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Movie} from './movie';
+import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
+  private moviesLimit = 10;
+
+  constructor(private apiService: ApiService) {
+  }
+
   public async getTopMovies(): Promise<Array<Movie>> {
-    const movies = [];
-    for (const i of [0, 1, 2, 3, 4]) {
-      const movie = new Movie();
-      movie.title = 'Movie' + i.toString();
-      movie.rating = i;
-      movies[i] = movie;
-    }
-    return movies;
+    return this.apiService.getTopMovies(this.moviesLimit);
   }
 }
