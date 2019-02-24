@@ -5,7 +5,7 @@
       <div *ngIf="movies">
         <ol>
           <li *ngFor="let movie of movies; index as movieIndex" class="movie-list-item">
-            <a (click)="onMovieSelect(movieIndex)" id="movie-item-{{movieIndex}}">{{movie.title}}</a>
+            <a (click)="onMovieSelect(movieIndex)">{{movie.title}}</a>
           </li>
         </ol>
       </div>
