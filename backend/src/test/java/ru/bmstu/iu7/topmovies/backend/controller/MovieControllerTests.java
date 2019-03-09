@@ -59,4 +59,21 @@ public class MovieControllerTests {
                 .assertEquals(ResponseEntity.ok(moviesList),
                         movieController.getTopMovies(Mockito.anyInt()));
     }
+
+    @Test
+    public void deleteMovie_MovieExists_ReturnsOk() {
+        var movie = new Movie();
+
+        var mockService = Mockito.mock(MovieService.class);
+        Mockito
+                .doReturn(Optional.of(movie))
+                .when(mockService)
+                .deleteMovie(Mockito.anyString());
+
+        var movieController = new MovieController(mockService);
+
+        Assert
+                .assertEquals(ResponseEntity.ok().build(),
+                        movieController.deleteMovie(Mockito.anyString()));
+    }
 }
